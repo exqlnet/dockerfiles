@@ -1,0 +1,92 @@
+{
+    "log": {
+        "access": "/var/log/v2ray/access.log",
+        "error": "/var/log/v2ray/error.log",
+        "loglevel": "none",
+        "dnsLog": false
+    },
+    "dns": {
+        "servers": [
+            "https+local://1.1.1.1/dns-query"
+        ]
+    },
+    "inbounds": [
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "metadataOnly": false
+            },
+            "port": 2086,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "/vpn",
+                    "headers": {
+                        "Host": "ec2-18-139-163-139.ap-southeast-1.compute.amazonaws.com"
+                    },
+                    "maxEarlyData": 2048,
+                    "useBrowserForwarding": false,
+                    "earlyDataHeaderName": "Sec-WebSocket-Protocol"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "UseIPv4"
+            }
+        },
+        {
+            "tag": "warp",
+            "protocol": "wireguard",
+            "settings": {
+                "address": "162.159.192.1",
+                "localAddresses": [
+                    "172.16.0.2"
+                ],
+                "peerPublicKey": "<wireguard-public-key>",
+                "port": 2408,
+                "preSharedKey": "",
+                "privateKey": "<wireguard-private-key>",
+                "mtu": 1500
+            }
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "mph",
+        "rules": [
+            {
+                "type": "field",
+                "outboundTag": "warp",
+                "domains": [
+                    "geosite:twitter",
+                    "geosite:spotify",
+                    "geosite:category-games",
+                    "geosite:cn"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  v2ray:
+    image: exqlnet/sagernet-v2ray:latest
+    restart: always
+    volumes:
+      - ./config:/etc/v2ray
+    ports:
+      - 8888:2086
