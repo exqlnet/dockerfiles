@@ -25,7 +25,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx"
+                        "id": "<uuidxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx>"
                     }
                 ]
             },
@@ -34,9 +34,9 @@
                 "security": "none",
                 "wsSettings": {
                     "acceptProxyProtocol": false,
-                    "path": "/vpn",
+                    "path": "/qunima",
                     "headers": {
-                        "Host": "ec2-18-139-163-139.ap-southeast-1.compute.amazonaws.com"
+                        "Host": "<ec2-host-ip>"
                     },
                     "maxEarlyData": 2048,
                     "useBrowserForwarding": false,
